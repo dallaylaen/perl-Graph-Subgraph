@@ -1,0 +1,11 @@
+Changes
+lib/Graph/Subgraph.pm
+MANIFEST
+MANIFEST.SKIP
+README
+t/00-load.t
+t/10-subgraph.t
+t/boilerplate.t
+t/manifest.t
+t/pod-coverage.t
+t/pod.t
