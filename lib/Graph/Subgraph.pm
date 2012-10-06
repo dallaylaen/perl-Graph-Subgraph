@@ -13,7 +13,7 @@ Version 0.01
 
 =cut
 
-our $VERSION = '0.0101';
+our $VERSION = '0.0102';
 
 =head1 SYNOPSIS
 
@@ -34,6 +34,8 @@ so that any descendant of Graph can call it.
 
 =head2 subgraph( \@src, [ \@dst ] );
 
+=head2 subgraph( @src );
+
 Returns a subgraph of the original graph induced by two sets of vertices.
 
 A vertex is copied if and only if it belongs to one of the sets. An edge is
@@ -41,6 +43,8 @@ copied if and only if it starts in the first set and ends in the second set.
 
 If only one set is given, it is used as both. (So that is "subgraph induced
 by a set of vertices").
+
+The sets may be given as one or two array references, or list.
 
 The properties of the original graph (directedness etc.) are preserved,
 however the properties of vertices and edges are not.
@@ -54,10 +58,19 @@ package Graph;
 use Carp;
 
 sub subgraph {
-	my ($self, $src, $dst) = @_;
-	$dst //= $src;
-	croak "Arguments of subgraph must be arrayrefs"
-		unless ref $src eq 'ARRAY' and ref $dst eq 'ARRAY';
+	my $self = shift;
+	my ($src, $dst);
+	if (!ref $_[0]) {
+		$src = $dst = [ @_ ];
+		# no check here
+	} else {
+		$src = shift;
+		$dst = shift || $src;
+		croak "Extra arguments in subgraph"
+			if @_;
+		croak "Arguments of subgraph must be array references"
+			unless ref $src eq 'ARRAY' and ref $dst eq 'ARRAY';
+	};
 
 	# Now we'll use undocumented feature of Graph.
 	# As the source tells, new() will copy properties but not vertices/edges

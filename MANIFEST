@@ -9,3 +9,8 @@ t/boilerplate.t
 t/manifest.t
 t/pod-coverage.t
 t/pod.t
+Makefile.PL
+t/11-complete.t
+t/12-empty.t
+t/13-error.t
+t/14-plain-list.t
