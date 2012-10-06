@@ -13,7 +13,7 @@ Version 0.01
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.0101';
 
 =head1 SYNOPSIS
 
@@ -29,15 +29,15 @@ our $VERSION = '0.01';
 
 =head1 METHODS
 
-The only method resides in the Graph namespace so that any descendant of
-Graph could call it.
+The only method resides in the Graph package (not Graph::Subgraph)
+so that any descendant of Graph can call it.
 
 =head2 subgraph( \@src, [ \@dst ] );
 
 Returns a subgraph of the original graph induced by two sets of vertices.
 
 A vertex is copied if and only if it belongs to one of the sets. An edge is
-copied if and only if it starts in the frst set and ends in the second set.
+copied if and only if it starts in the first set and ends in the second set.
 
 If only one set is given, it is used as both. (So that is "subgraph induced
 by a set of vertices").
@@ -54,33 +54,33 @@ package Graph;
 use Carp;
 
 sub subgraph {
-  my ($self, $src, $dst) = @_;
-  $dst //= $src;
-  croak "Arguments of subgraph must be arrayrefs"
-    unless ref $src eq 'ARRAY' and ref $dst eq 'ARRAY';
+	my ($self, $src, $dst) = @_;
+	$dst //= $src;
+	croak "Arguments of subgraph must be arrayrefs"
+		unless ref $src eq 'ARRAY' and ref $dst eq 'ARRAY';
 
-  # Now we'll use undocumented feature of Graph.
-  # As the source tells, new() will copy properties but not vertices/edges
-  # if called this way
-  my $subg = $self->new;
+	# Now we'll use undocumented feature of Graph.
+	# As the source tells, new() will copy properties but not vertices/edges
+	# if called this way
+	my $subg = $self->new;
 
-  # iterate over $src and $dst sets, copying edges when needed
-  foreach my $s (@$src) {
-    $self->has_vertex($s) or next;
-    $subg->add_vertex($s);
-    my @edges;
-    foreach my $d (@$dst) {
-      $self->has_edge($s, $d) and push @edges, $s, $d;
-    };
-    $subg->add_edges(@edges); # don't call too often, keep memory usage linear
-  };
+	# iterate over $src and $dst sets, copying edges when needed
+	foreach my $s (@$src) {
+		$self->has_vertex($s) or next;
+		$subg->add_vertex($s);
+		my @edges;
+		foreach my $d (@$dst) {
+			$self->has_edge($s, $d) and push @edges, $s, $d;
+		};
+		$subg->add_edges(@edges); # don't call too often, keep memory usage linear
+	};
 
-  # now add orphaned vertices from the dst set
-  foreach my $d (@$dst) {
-    $self->has_vertex($d) and $subg->add_vertex($d);
-  };
+	# now add orphaned vertices from the dst set
+	foreach my $d (@$dst) {
+		$self->has_vertex($d) and $subg->add_vertex($d);
+	};
 
-  return $subg;
+	return $subg;
 }
 
 =head1 AUTHOR

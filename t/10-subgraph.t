@@ -30,7 +30,7 @@ is ($U->subgraph([ $U->vertices ]), $U, "Full subgraph");
 unlike ($U->subgraph([ $U->vertices ], []), qr([-=]), "unconnected-src");
 unlike ($U->subgraph([], [ $U->vertices ]), qr([-=]), "unconnected-dst");
 is ($U->subgraph(['x', 'z'], [qw(x y z t p q)]), 'x=y,y=z,p,q',
-  "Now two edges");
+	"Now two edges");
 
 
 
