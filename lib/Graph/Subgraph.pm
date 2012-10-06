@@ -9,11 +9,11 @@ Graph::Subgraph - A subgraph() method for Graph module.
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.0102';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
@@ -102,9 +102,7 @@ Konstantin S. Uvarin, C<< <khedin at gmail.com> >>
 
 =head1 BUGS
 
-This module should be part of Graph.
-
-Test suite is too sparse.
+This module should be merged into Graph.
 
 Please report any bugs or feature requests to C<bug-graph-subgraph at rt.cpan.org>, or through
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Graph-Subgraph>.  I will be notified, and then you'll
@@ -120,6 +118,10 @@ You can find documentation for this module with the perldoc command.
 You can also look for information at:
 
 =over 4
+
+=item * github
+
+L<https://github.com/dallaylaen/perl-Graph-Subgraph>
 
 =item * RT: CPAN's request tracker
 
