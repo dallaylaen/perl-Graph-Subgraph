@@ -1,7 +1,14 @@
-Graph-Subgraph
+Graph::Subgraph
 
-This module adds a subgraph() method to the Graph (and therefore all its 
-descendants). 
+This module allows to create subgraphs of a given Graph object
+induced by a set (or two) of vertices.
+
+A vertex of the original graph is copied if and only if it is in set1 OR set2.
+
+An edge of the original graph is copied if and only if it starts in set1 and
+ends in set2 (or set1 if set2 wasn't given).
+
+It should be merged into Graph some day.
 
 INSTALLATION
 
