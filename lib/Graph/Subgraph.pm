@@ -13,7 +13,7 @@ Version 0.02
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.0201';
 
 =head1 SYNOPSIS
 
@@ -24,8 +24,6 @@ our $VERSION = '0.02';
     $foo->add_edges(qw(x y y z));
     my $bar = $foo->subgraph(['x', 'y']);
     # $bar is now 'x-y'
-
-=head1
 
 =head1 METHODS
 
@@ -56,6 +54,13 @@ use Graph;
 package Graph;
 
 use Carp;
+
+# Warn if method is present in Graph, but still override it
+BEGIN {
+	carp "Found subgraph method in Graph, Graph::Subgraph is now deprecated"
+		if Graph->can('subgraph');
+};
+no warnings 'redefine';
 
 sub subgraph {
 	my $self = shift;
