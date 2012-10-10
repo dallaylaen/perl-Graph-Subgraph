@@ -13,7 +13,7 @@ Version 0.02
 
 =cut
 
-our $VERSION = '0.0201';
+our $VERSION = '0.0202';
 
 =head1 SYNOPSIS
 
@@ -46,6 +46,13 @@ The sets may be given as one or two array references, or list.
 
 The properties of the original graph (directedness etc.) are preserved,
 however the properties of vertices and edges are not.
+
+B<Complexity:> This method has a computational complexity of O(N(src)*N(dst)).
+
+In theory, O(N(egdes_in_initial_graph)) is also possible, and the algorithm
+should choose whichever is better. This is not done yet.
+
+Feel free to file a bug report if there's anything faster.
 
 =cut
 
