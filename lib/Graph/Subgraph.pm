@@ -13,7 +13,7 @@ Version 0.02
 
 =cut
 
-our $VERSION = '0.0202';
+our $VERSION = '0.0203';
 
 =head1 SYNOPSIS
 
@@ -56,18 +56,8 @@ Feel free to file a bug report if there's anything faster.
 
 =cut
 
-use Graph;
-
-package Graph;
-
 use Carp;
-
-# Warn if method is present in Graph, but still override it
-BEGIN {
-	carp "Found subgraph method in Graph, Graph::Subgraph is now deprecated"
-		if Graph->can('subgraph');
-};
-no warnings 'redefine';
+use Graph;
 
 sub subgraph {
 	my $self = shift;
@@ -108,6 +98,16 @@ sub subgraph {
 	return $subg;
 }
 
+# FIXME UGLY HACK
+# Now plant the subgraph method into Graph.
+# Warn if method is present in Graph, but still override it
+carp "Found subgraph method in Graph, Graph::Subgraph is now deprecated"
+	if Graph->can('subgraph');
+
+{
+	no warnings 'redefine', 'once'; ## no critic
+	*Graph::subgraph = \&subgraph;
+};
 =head1 AUTHOR
 
 Konstantin S. Uvarin, C<< <khedin at gmail.com> >>
