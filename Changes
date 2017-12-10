@@ -1,5 +1,9 @@
 Revision history for Graph-Subgraph
 
+0.03    Sun Dec 10 2017
+        * Deprecated as Graph 0.97 has native subgraph method
+            see https://rt.cpan.org/Ticket/Display.html?id=65497
+
 0.02    Sun Oct 7 2012
         * API: added list form: $G->subgraph(qw(foo bar))
         * TST: improved test suite
