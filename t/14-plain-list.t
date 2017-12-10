@@ -5,7 +5,7 @@ use Test::More tests => 2;
 
 use Graph::Subgraph;
 
-my $G = Graph->new(directed=>0, vertices => [1..5]);
+my $G = Graph::Subgraph->new(directed=>0, vertices => [1..5]);
 
 is ($G->subgraph, "", "no args => empty subgraph");
 

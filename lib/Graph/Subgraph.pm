@@ -1,21 +1,18 @@
+package Graph::Subgraph;
+
 use warnings;
 use strict;
-
-package Graph::Subgraph;
+our $VERSION = '0.03';
 
 =head1 NAME
 
 Graph::Subgraph - A subgraph() method for Graph module.
 
-=head1 VERSION
-
-Version 0.02
-
-=cut
-
-our $VERSION = '0.0204';
-
 =head1 SYNOPSIS
+
+B<[DEPRECATED]> L<Graph/subgraph> was added in C<Graph> 0.97,
+so this module is now useless and does nothing, unless outdated
+Graph is detected.
 
     use Graph;
     use Graph::Subgraph;
@@ -57,7 +54,7 @@ Feel free to file a bug report if there's anything faster.
 =cut
 
 use Carp;
-use Graph;
+use parent 'Graph';
 
 sub subgraph {
 	my $self = shift;
@@ -100,14 +97,16 @@ sub subgraph {
 
 # FIXME UGLY HACK
 # Now plant the subgraph method into Graph.
-# Warn if method is present in Graph, but still override it
-carp "Found subgraph method in Graph, Graph::Subgraph is now deprecated"
-	if Graph->can('subgraph');
+# Just warn if method is present in Graph
 
-{
+if (Graph->can('subgraph')) {
+    carp "Found Graph->subgraph, it is safe to remove deprecated 'use Graph::Subgraph;' now";
+} else {
+    carp "Graph::Subgraph is deprecated, please upgrade Graph to >=0.97";
 	no warnings 'redefine', 'once'; ## no critic
 	*Graph::subgraph = \&subgraph;
 };
+
 =head1 AUTHOR
 
 Konstantin S. Uvarin, C<< <khedin at gmail.com> >>

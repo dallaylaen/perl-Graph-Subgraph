@@ -6,8 +6,7 @@ use Test::Exception;
 
 use Graph::Subgraph;
 
-my $G = Graph->new;
-
+my $G = Graph::Subgraph->new;
 
 dies_ok {
 	$G->subgraph([], [], []);
