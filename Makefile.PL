@@ -17,6 +17,16 @@ WriteMakefile(
 		'Carp' => 0,
 		'Test::Exception' => 0,
     },
+    META_MERGE => {
+        "meta-spec" => { version => 2 },
+        resources   => {
+            repository => {
+                type => 'git',
+                url => 'https://github.com/dallaylaen/perl-Graph-Subgraph.git',
+                web => 'https://github.com/dallaylaen/perl-Graph-Subgraph',
+            },
+        },
+    },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Graph-Subgraph-*' },
 );
