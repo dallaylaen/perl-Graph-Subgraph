@@ -4,6 +4,7 @@ use strict;
 use Test::More;
 
 use Graph::Subgraph;
+use Graph::Undirected;
 
 plan tests => 10;
 
