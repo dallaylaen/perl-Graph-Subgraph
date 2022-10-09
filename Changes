@@ -1,5 +1,9 @@
 Revision history for Graph-Subgraph
 
+0.04    Sun Oct 9 2022
+        * Override Craph::subgraph anyway, but keep deprecated warning
+        * Fix tests for perls > 5.3x
+
 0.03    Sun Dec 10 2017
         * Deprecated as Graph 0.97 has native subgraph method
             see https://rt.cpan.org/Ticket/Display.html?id=65497
