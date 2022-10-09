@@ -2,7 +2,7 @@ package Graph::Subgraph;
 
 use warnings;
 use strict;
-our $VERSION = '0.03';
+our $VERSION = 0.04;
 
 =head1 NAME
 
@@ -100,9 +100,12 @@ sub subgraph {
 # Just warn if method is present in Graph
 
 if (Graph->can('subgraph')) {
-    carp "Found Graph->subgraph, it is safe to remove deprecated 'use Graph::Subgraph;' now";
+    carp "Graph::Subgraph is deprecated, please just 'use Graph' instead";
 } else {
-    carp "Graph::Subgraph is deprecated, please upgrade Graph to >=0.97";
+    carp "Graph::Subgraph is deprecated, please upgrade to Graph >= 0.97";
+};
+
+{
 	no warnings 'redefine', 'once'; ## no critic
 	*Graph::subgraph = \&subgraph;
 };
